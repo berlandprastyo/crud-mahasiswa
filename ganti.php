@@ -68,7 +68,7 @@ mysqli_stmt_close($update);
         <label for="npm">PASSWORD LAMA</label>
         <input type="password" name="oldPassword" required placeholder="Masukkan Password Lama">
         <br>
-        <label for="nama">PASSWOR BARU</label>
+        <label for="nama">PASSWORD BARU</label>
         <input type="password" name="newPassword" required placeholder="Masukkan Password Baru">
         <br>
         <label for="prodi">ULANGI PASSWORD BARU </label>
