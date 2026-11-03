@@ -1,0 +1,19 @@
+<?php 
+// database connection
+$dbhost = "";
+$dbuser = "";
+$dbpassword = "";
+$dbname = "db_mahasiswa";
+$conn = mysqli_connect(
+    $dbhost,$dbuser,$dbpassword,$dbname
+);
+
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+// logo header
+// variabel ini akan digunakan pada header dan juga favicon (logo website)
+$logo = __DIR__ . "assets/images/logo.png";
+// header title
+$header = "UNIVERSITAS FIKSI";
+?>
