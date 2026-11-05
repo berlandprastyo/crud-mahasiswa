@@ -4,6 +4,10 @@ if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
+  if ($_SESSION['role'] !== "admin") {
+        header("Location: index.php");
+        exit;
+    }
 include_once __DIR__ . "/config/config.php";
 define('APP_ACCESS', true);
 $pesan = $_SESSION['pesan'] ?? '';
@@ -25,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     elseif (!ctype_digit($angkatan) ||  
             (int)$angkatan < 2000 || 
-            (int)$angkatan > 2030) {
+            (int)$angkatan > 2050) {
         $pesan = "Tahun Tidak Valid!";
     }
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

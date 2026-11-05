@@ -51,7 +51,10 @@ $prodi = $_GET['prodi'] ?? '';
     <nav>
         <div class="nav-left">
             <a href="index.php">DASHBOARD</a>
-            <a href="tambah.php">TAMBAH MAHASISWA</a>
+            <?php if ($_SESSION['username'] == "admin") { ?>
+                
+            
+            <a href="tambah.php">TAMBAH MAHASISWA</a> <?php } ?>
         </div>
         <a href="ganti.php">GANTI PASSWORD</a>
     </nav>

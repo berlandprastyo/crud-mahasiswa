@@ -8,7 +8,15 @@ include_once __DIR__ . "/config/config.php";
 define('APP_ACCESS', true);
 $no = 0;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = $_POST['id'];
+      if ($_SESSION['role'] !== "admin") {
+        header("Location: index.php");
+        exit;
+    }
+    $id = $_POST['id'] ?? '';
+    if (!ctype_digit($id)) {
+    die("ID tidak valid!");
+    }
+    $id = (int) $id;
     $stmt = mysqli_prepare($conn,'DELETE FROM mahasiswa WHERE id=?');
     mysqli_stmt_bind_param($stmt,"i",$id);
     mysqli_stmt_execute($stmt);
@@ -49,7 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                      <th>PRODI</th>
                      <th>ANGKATAN</th>
                      <th>EMAIL</th>
+                     <?php if ($_SESSION['role'] == "admin") { ?>
                      <th>ACTION</th>
+                      <?php } ?>
             </tr>
         </thead>
         <tbody>
@@ -63,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <td><?= $row['prodi']; ?></td>
                     <td><?= $row['angkatan']; ?></td>
             <td><?= $row['email']; ?></td>
-            <td> 
+            <?php if ($_SESSION['role'] == "admin") { ?>
+            <td>
                 <div class="action-group">
                     <form action="update.php" method="GET">
                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
@@ -74,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <button type="submit" class="btn-delete">HAPUS DATA</button>
                     </form>
                 </div>
-            </td>
+            </td> <?php } ?>
         </tr>
         <?php }?>
     </tbody>

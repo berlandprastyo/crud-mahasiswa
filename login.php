@@ -3,7 +3,7 @@ session_start();
 include_once  __DIR__ . "/config/config.php";
 $pesan = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $username = trim($_POST["username"]);
     $password = $_POST["password"];
     $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=?");
     mysqli_stmt_bind_param($stmt,"s",$username);
@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($row && password_verify($password,$row['password'])) {
          $_SESSION['login'] = true;
          $_SESSION['username'] = $row['username'];
+         $_SESSION['role'] = $row['role'];
         header("Location: index.php");
         exit;
     }

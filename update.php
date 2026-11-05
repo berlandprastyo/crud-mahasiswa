@@ -4,12 +4,12 @@ if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
+ if ($_SESSION['role'] !== "admin") {
+        header("Location: index.php");
+        exit;
+    }
 include_once __DIR__ . "/config/config.php";
 define('APP_ACCESS', true);
-if (!defined('APP_ACCESS')) {
-    http_response_code(403);
-    exit("Forbidden");
-}
 $pesan = $_SESSION['pesan'] ?? '';
 unset($_SESSION['pesan']);
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
@@ -25,7 +25,7 @@ if (!$row) {
      die("Data Mahasiswa Tidak Ada!");   
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {   
     $nama = strtoupper(trim($_POST["nama"]));
     $angkatan = trim($_POST["angkatan"]);
     $email = trim($_POST["email"]);

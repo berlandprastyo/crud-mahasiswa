@@ -1,16 +1,17 @@
 ## Fitur
--**Dibuat Dengan PHP Native**
-- **Autentikasi** – Sistem login menggunakan session untuk membatasi akses pengguna.
-- **Manajemen Data Mahasiswa (CRUD)** –
-- **Validasi Form** – Validasi input di sisi server untuk mencegah data yang tidak valid.
-- **Pencegahan SQL Injection** – Menggunakan MySQLi prepared statements untuk menangani query database dengan lebih aman.
-- **Pencegahan Duplikat Data** – Mencegah penggunaan NPM dan email yang sudah terdaftar.
-- **Pencarian Mahasiswa** – Mencari data mahasiswa berdasarkan nama atau NPM.
+
+- **Dibuat Dengan PHP Native**
+- **Autentikasi** - Sistem login menggunakan session untuk membatasi akses pengguna.
+- **Otorisasi Berbasis Role** - Hak akses dibedakan berdasarkan role pengguna. Admin dapat melakukan Create, Read, Update, dan Delete (CRUD), sedangkan Viewer hanya dapat melihat data mahasiswa.
+- **Validasi Form** - Validasi input di sisi server untuk mencegah data yang tidak valid.
+- **Pencegahan SQL Injection** - Menggunakan MySQLi prepared statements untuk menangani query database dengan lebih aman.
+- **Pencegahan Duplikat Data** - Mencegah penggunaan NPM dan email yang sudah terdaftar.
+- **Pencarian Mahasiswa** - Mencari data mahasiswa berdasarkan nama atau NPM.
 - **Ganti Password User** - Mengganti password user untuk keamanan.
-- **Pesan Lebih Interaktif** - Membantu pengguna untuk lebih paham.
-- **Filter Program Studi** – Menyaring data mahasiswa berdasarkan program studi.
-- **Konfigurasi Dinamis** – Mengatur logo, favicon, dan judul header website melalui `config.php`.
-- **Kustomisasi Tema** – Mengubah warna utama dan sekunder website melalui variabel CSS di `style.css`.
+- **Pesan Lebih Interaktif** - Membantu pengguna untuk lebih memahami proses yang dilakukan.
+- **Filter Program Studi** - Menyaring data mahasiswa berdasarkan program studi.
+- **Konfigurasi Dinamis** - Mengatur logo, favicon, dan judul header website melalui `config.php`.
+- **Kustomisasi Tema** - Mengubah warna utama dan sekunder website melalui variabel CSS di `style.css`.
 
 ## Kustomisasi
 
@@ -37,6 +38,7 @@ cd crud-mahasiswa
 ```
 
 ### 2. Konfigurasi Database
+
 - Import file `database/db_mahasiswa.sql` melalui phpMyAdmin atau MySQL command line.
 
 ### 3. Konfigurasi Aplikasi
@@ -59,11 +61,22 @@ $dbname = "db_mahasiswa";
 
 ### 5. Login
 
-Gunakan akun administrator bawaan berikut:
+Tersedia dua akun bawaan dengan hak akses berbeda:
 
-| Keterangan | Nilai |
-|---|---|
-| Username | `admin` |
-| Password | `admin` |
+**Akun Administrator**
 
-**Catatan:** Ganti password administrator bawaan segera!.
+| Keterangan | Nilai   |
+| ---------- | ------- |
+| Username   | `admin` |
+| Password   | `admin` |
+| Role       | `admin` |
+
+**Akun Viewer**
+
+| Keterangan | Nilai    |
+| ---------- | -------- |
+| Username   | `member` |
+| Password   | `member` |
+| Role       | `viewer` |
+
+**Catatan:** Ganti password akun bawaan segera setelah login untuk menjaga keamanan aplikasi.
