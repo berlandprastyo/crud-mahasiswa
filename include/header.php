@@ -54,16 +54,15 @@ $prodi = $_GET['prodi'] ?? '';
     
     <div class="navbar-menu" id="navbar-menu">
     <nav>
-        <div class="nav-left">
             <a href="index.php">DASHBOARD</a>
             <?php if ($_SESSION['role'] == "admin") { ?>
                 
             
             <a href="tambah.php">TAMBAH MAHASISWA</a>
-            <a href="role.php">KELOLA ROLE</a> <?php } ?>
-        </div>
+            <a href="role.php">MANAJEMEN ROLE</a> <?php } ?>
+
         <a href="ganti.php">GANTI PASSWORD</a>
-        <a href="logout.php">LOGOUT</a>
+        <a href="logout.php">KELUAR</a>
     </nav>
     </div>
 </header>

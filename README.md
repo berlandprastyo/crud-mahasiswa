@@ -5,6 +5,7 @@
 - **Otorisasi Berbasis Role** - Hak akses dibedakan berdasarkan role pengguna. Admin dapat melakukan Create, Read, Update, dan Delete (CRUD), sedangkan Viewer hanya dapat melihat data mahasiswa.
 - **Validasi Form** - Validasi input di sisi server untuk mencegah data yang tidak valid.
 - **Perubahan Role** - User dengan role admin bisa melakukan perubahan role anggota lain
+- **Buat Akun Baru** - Setiap pengunjung dapat membuat akun baru dengan role default viewer
 - **Pencegahan SQL Injection** - Menggunakan MySQLi prepared statements untuk menangani query database dengan lebih aman.
 - **Pencegahan Duplikat Data** - Mencegah penggunaan NPM dan email yang sudah terdaftar.
 - **Pencarian Mahasiswa** - Mencari data mahasiswa berdasarkan nama atau NPM.

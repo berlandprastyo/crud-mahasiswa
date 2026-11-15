@@ -48,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="icon" type="image/png" href="<?=htmlspecialchars($logo); ?>">
 </head>
 <body>
@@ -58,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>SISTEM PENGELOLAAN DATA MAHASISWA</p>
     </div>
 </header>
-
     <div class="container-login">
 <div class="form-add">
     <?php if ($pesan != "") { ?>
@@ -71,16 +72,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="username" required placeholder="Masukkan Username">
         <br>
         <label for="password"><b>PASSWORD</b></label>
-        <input type="password" name="password" required placeholder="Masukkan Password">
+        <div class="password">
+            <input type="password" name="password" id="password" required placeholder="Masukkan Password">
+            <button type="button" id="toggle">
+                <i class="fa-solid fa-eye-slash"></i>
+            </button>
+        </div>
         <br>
         <label for="random"><b><?=$_SESSION['random1'] . " + " . $_SESSION['random2'] . " =" ?></b></label>
-        <input type="number" name="random" required placeholder="Masukkan Jawaban">
-        <br>
+        <input type="number" name="random" required placeholder="Masukkan Jawaban"> 
+        <p>Belum Memiliki Akun? <a href="registrasi.php">Buat Akun</a></p> 
         <div class="btn-group">
             <button type="submit">LOGIN</button>
         </div>
     </form>
 </div>
 </div>
+<script src="/assets/script.js"></script>
 </body>
 </html>

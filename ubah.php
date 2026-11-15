@@ -4,10 +4,6 @@ if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
- if ($_SESSION['role'] !== "admin") {
-        header("Location: index.php");
-        exit;
-    }
 include_once __DIR__ . "/config/config.php";
 define('APP_ACCESS', true);
 $pesan = $_SESSION['pesan'] ?? '';
@@ -25,14 +21,18 @@ if (!$row) {
      die("Data User Tidak Ada!");   
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {   
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SESSION['role'] !== "admin") {
+        header("Location: index.php");
+        exit;
+    }   
     $username = trim($_POST["username"]);
     $role = trim($_POST["role"]);
     if ((int)$_SESSION['id'] == $id && $role != "admin") {
-        $pesan = "Tidak Bisa Ubah Role Anda Sendiri!";
+        $_SESSION['pesan'] = "Tidak Bisa Ubah Role Anda Sendiri!";
     }
     elseif (!preg_match("/^[a-zA-Z0-9_]{5,20}$/",$username)) {
-        $pesan = "Username Yang Diperbolehkan 5-20 karakter dan Tanpa Spasi";
+        $_SESSION['pesan'] = "Username Yang Diperbolehkan 5-20 karakter dan Tanpa Spasi";
     }
     else {
     $stmt = mysqli_prepare($conn,"UPDATE users SET username = ?, role = ? WHERE id = ?");
@@ -43,9 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
     $_SESSION['pesan'] = "Gagal Update Data!";
     }
+    }
     header("Location: ubah.php?id=" . $id );
     exit;
-}
 }
 ?>
 <!DOCTYPE html>
