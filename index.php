@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['prodi']; ?></td>
                     <td><?= $row['angkatan']; ?></td>
-            <td><?= $row['email']; ?></td>
+                    <td><?= $row['email']; ?></td>
             <?php if ($_SESSION['role'] == "admin") { ?>
             <td>
                 <div class="action-group">

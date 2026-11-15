@@ -1,23 +1,42 @@
 <?php 
 session_start();
 include_once  __DIR__ . "/config/config.php";
-$pesan = "";
+$pesan = $_SESSION['pesan'] ?? '';
+unset($_SESSION['pesan']);
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    $_SESSION['random1'] = rand(1, 10);
+    $_SESSION['random2'] = rand(1, 10);
+    $_SESSION['hasil'] = $_SESSION['random1'] + $_SESSION['random2'];
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
+    $hasilRandom = (int)$_POST['random'];
     $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=?");
     mysqli_stmt_bind_param($stmt,"s",$username);
     mysqli_stmt_execute($stmt);
     $row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
-    if ($row && password_verify($password,$row['password'])) {
+    if ($hasilRandom != $_SESSION['hasil']) {
+        $_SESSION['pesan'] = "Jawaban Anda Salah!";
+        unset($_SESSION['hasil'],$_SESSION['random1'],$_SESSION['random2']);
+        header("Location: login.php");
+        exit;
+    }
+    elseif ($row && password_verify($password,$row['password'])) {
          $_SESSION['login'] = true;
          $_SESSION['username'] = $row['username'];
          $_SESSION['role'] = $row['role'];
+         $_SESSION['id'] = $row['id'];
+        unset($_SESSION['hasil'],$_SESSION['random1'],$_SESSION['random2']);
         header("Location: index.php");
         exit;
     }
     else{
-        $pesan = ("Username Atau Password Salah!");
+    $_SESSION['pesan'] = "Username Atau Password Salah!";
+    unset($_SESSION['hasil'],$_SESSION['random1'],$_SESSION['random2']);
+    header("Location: login.php");
+    exit;
     }
 }
 
@@ -40,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </header>
 
-    <div class="container-add">
+    <div class="container-login">
 <div class="form-add">
     <?php if ($pesan != "") { ?>
     <div class="alert">
@@ -48,11 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 <?php } ?>
     <form action="" method="POST">
-        <label for="nama">USERNAME</label>
+        <label for="nama"><b>USERNAME</b></label>
         <input type="text" name="username" required placeholder="Masukkan Username">
         <br>
-        <label for="prodi">PASSWORD</label>
+        <label for="password"><b>PASSWORD</b></label>
         <input type="password" name="password" required placeholder="Masukkan Password">
+        <br>
+        <label for="random"><b><?=$_SESSION['random1'] . " + " . $_SESSION['random2'] . " =" ?></b></label>
+        <input type="number" name="random" required placeholder="Masukkan Jawaban">
         <br>
         <div class="btn-group">
             <button type="submit">LOGIN</button>

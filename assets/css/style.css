@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
-     background-color: #f3f4f6;
+    background-color: #f4f4f5;
 }
 html {
     scroll-behavior: smooth;
@@ -49,6 +49,27 @@ html {
     background-color: var(--primary-color);
     color: white;
 }
+.ubah {
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.ubah:focus {
+    border-color:blue;
+}
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+.navbar-menu {
+    min-width: 0;
+}
+
 
 .navbar-header {
     display: flex;
@@ -89,8 +110,20 @@ html {
 .navbar-search input {
     width: 300px;
     padding: 10px;
-    border: none;
+     border: 1px solid #ccc;
+    outline: none;
     border-radius: 5px;
+}
+.navbar-search input:focus {
+    border-color:blue;
+}
+.filter-prodi {
+    transition: 0.2s ease;
+}
+.filter-prodi:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    transform: scale(1.02);
 }
 
 .navbar-search button {
@@ -99,6 +132,20 @@ html {
     border-radius: 5px;
     cursor: pointer;
 }
+.container-login {
+    background-image: url("/assets/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
+ .form-add label, .form-update label {
+        font-size: 14px;
+    }
+.navbar-menu nav {
+    padding-top: 20px;
+    
+}    
 
 @media (max-width: 768px) {
     .navbar {
@@ -108,7 +155,48 @@ html {
     }
 
     .navbar-header {
-        justify-content: center;
+        justify-content: space-between;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .navbar-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transform: translateY(-10px);
+        visibility: hidden;
+        transition:
+            max-height 0.4s ease,
+            transform 0.4s ease,
+            visibility 0.4s ease;
+    }
+
+    .navbar-menu.active {
+        max-height: 600px;
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .navbar-menu nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding-top: 0;
+    }
+
+    .nav-left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
     .navbar-search {
@@ -120,32 +208,15 @@ html {
         width: 100%;
         gap: 5px;
     }
-     .navbar-search select {
-        width: 32%;
-        min-width: 0;
-        height: 30px;
-    }
 
     .navbar-search input {
         flex: 1;
         width: 0;
         min-width: 0;
-        height: 10px;
     }
 
-    .navbar-search button {
-        flex-shrink: 0;
-        height: 30px;
-    }
-
-
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-     .container-add,
+    .container-add,
+    .container-login,
     .container-update {
         padding: 20px 15px;
     }
@@ -157,8 +228,9 @@ html {
         padding: 20px;
         box-sizing: border-box;
     }
+   
 }
-.navbar nav {
+.navbar-menu nav {
     display: flex;
     gap: 25px;
     width: 100%;
@@ -194,10 +266,8 @@ html {
         font-size: 14px;
     }
 }
-@media (max-width: 768px) {
-   
-}
-.container-add, .container-update{
+
+.container-add, .container-login, .container-update{
     flex: 1;
     width: 100%;
     display: flex;
@@ -208,11 +278,12 @@ html {
 }
 .form-add, .form-update {
     width: 100%;
-      max-width: 450px;
+    max-width: 450px;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 12px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.15);
+     background-color: #f3f4f6;
 }
 .form-add input, .form-update input {
     border: 1px solid #ccc;
@@ -258,19 +329,27 @@ input:read-only {
      display: flex;
     justify-content: center;
     background-color: rgb(84, 84, 84);
+    transition: 0.2s ease;
 }
 .btn-back:hover {
  background-color: rgb(119, 117, 117);
+}
+.btn-back:active {
+    transform: scale(0.95);
 }
 .btn-group button {
     border: 1px black solid;
     border-radius: 5px;
     background-color: var(--primary-color);
     color: white;
+    transition: 0.2s ease;
 }
-.btn-group button:hover{
+.btn-group button:hover {
     transition: 0.2s ease;
     background-color: var(--secondary-color);
+}
+.btn-group button:active {
+     transform: scale(0.95);
 }
 .container-table {
     width: 100%;
@@ -325,7 +404,11 @@ input:read-only {
     color: white;
     cursor: pointer;
     font-size: 14px;
+    transition: 0.2s ease;
 } 
+.action-group button:active {
+    transform: scale(0.95);
+}
 .btn-edit {
     background-color: var(--primary-color);
 }

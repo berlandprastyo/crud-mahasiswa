@@ -29,9 +29,13 @@ $prodi = $_GET['prodi'] ?? '';
                     <h1><?=htmlspecialchars($header);?></h1>
                     <p>SISTEM PENGELOLAAN DATA MAHASISWA</p>
                 </div>
+                  <button type="button" class="hamburger"
+                id="hamburger" aria-label="Buka menu"
+                aria-expanded="false">
+            ☰
+        </button>
         </div>
-         <div class="navbar-search">
-                <a href="logout.php">LOGOUT</a>
+        <div class="navbar-search">
             <form action="index.php" method="GET">
                 <select name="prodi" class="filter-prodi">
                     <option value="">SEMUA PRODI</option>
@@ -43,21 +47,26 @@ $prodi = $_GET['prodi'] ?? '';
                 </option>
                 <?php } ?>
             </select>
-            <input type="text" name="search" placeholder="Cari" value="<?=htmlspecialchars($search);?>">
+            <input type="text" name="search" placeholder="Cari Mahasiswa" value="<?=htmlspecialchars($search);?>">
             <button type="submit">Cari</button>
         </form>
     </div>
     
+    <div class="navbar-menu" id="navbar-menu">
     <nav>
         <div class="nav-left">
             <a href="index.php">DASHBOARD</a>
-            <?php if ($_SESSION['username'] == "admin") { ?>
+            <?php if ($_SESSION['role'] == "admin") { ?>
                 
             
-            <a href="tambah.php">TAMBAH MAHASISWA</a> <?php } ?>
+            <a href="tambah.php">TAMBAH MAHASISWA</a>
+            <a href="role.php">KELOLA ROLE</a> <?php } ?>
         </div>
         <a href="ganti.php">GANTI PASSWORD</a>
+        <a href="logout.php">LOGOUT</a>
     </nav>
+    </div>
 </header>
+<script src="/assets/script.js"></script>
 </body>
 </html>
